@@ -1,0 +1,37 @@
+.gradient-background {
+  background: linear-gradient(300deg, #35155d, #512b81, #4477ce);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#navbar {
+  font-family: "Offside", sans-serif;
+}
+
+#gg {
+  font-family: "Offside", sans-serif;
+}
+#header {
+  font-family: "Bodoni Moda", serif, "Dancing Script", cursive, "Lora", serif,
+    "Roboto Slab", serif;
+}
+
+.custom-link {
+  margin-right: 20px; /* Adjust the margin value as needed */
+}
+
+.bg {
+  background-image: url(./images/bgnd.png);
+  background-size: cover;
+}
