@@ -8,12 +8,21 @@ const Signup = () => {
   }, []);
   const [form, setForm] = useState({});
   const [user, setUsers] = useState([]);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleForm = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -28,6 +37,16 @@ const Signup = () => {
     });
     const data = await response.json();
     console.log(data);
+    e.preventDefault();
+
+    // Check if both email and password are not blank before processing the form
+    if (formData.email.trim() === "" || formData.password.trim() === "") {
+      alert("Email and Password cannot be blank");
+      return;
+    }
+
+    // Continue with form processing logic here
+    // ...
   };
 
   const getUsers = async () => {
@@ -65,7 +84,7 @@ const Signup = () => {
                   onChange={handleForm}
                   name="email"
                 />
-                <label for="floatingInput">Email address</label>
+                <label htmlFor="floatingInput">Email address</label>
               </div>
               <div className="form-floating mb-3">
                 <input
@@ -75,8 +94,9 @@ const Signup = () => {
                   onChange={handleForm}
                   name="password"
                 />
-                <label for="floatingPassword">Password</label>
+                <label htmlFor="floatingPassword">Password</label>
               </div>
+
               <div className="checkbox mb-3">
                 <label>
                   <input type="checkbox" value="remember-me" /> Terms and
