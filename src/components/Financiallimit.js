@@ -114,11 +114,11 @@ const Financiallimit = () => {
             <h2 className="mb-3" style={{ color: "white" }}>Budget Status</h2>
             {currentMonthExpenses > budget ? (
               <p className="fw-bold" style={{ color: "red" }}>
-                Exceeded Budget: ₹{(currentMonthExpenses - budget).toFixed(2)}
+                Exceeded Budget: ₹{Math.max(currentMonthExpenses - budget, 0).toFixed(2)}
               </p>
             ) : (
               <p className="fw-bold" style={{ color: "green" }}>
-                Remaining Budget: ₹{calculateRemainingBudget().toFixed(2)}
+                Remaining Budget: ₹{Math.max(calculateRemainingBudget(), 0).toFixed(2)}
               </p>
             )}
           </div>
@@ -126,7 +126,7 @@ const Financiallimit = () => {
           <div className="mt-4">
             <h2 className="mb-3" style={{ color: "white" }}>Remaining Amount</h2>
             <p className="fw-bold" style={{ color: "blue" }}>
-              Remaining Amount: ₹{(totalIncome - currentMonthExpenses).toFixed(2)}
+              Remaining Amount: ₹{Math.max(totalIncome - currentMonthExpenses, 0).toFixed(2)}
             </p>
           </div>
         </div>

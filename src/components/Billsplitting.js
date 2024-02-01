@@ -141,7 +141,7 @@ const Service = () => {
                     result.amount > 0 ? "list-group-item-success" : "list-group-item-danger"
                   }`}
                 >
-                  {`${result.name}: ${result.amount > 0 ? "Owes" : "Is Owed"} ₹${Math.abs(
+                  {`${result.name}: ${result.amount > 0 ? "Will Recieve" : "Pending"} ₹${Math.abs(
                     result.amount
                   )} from the group`}
                 </li>

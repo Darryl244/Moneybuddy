@@ -14,7 +14,6 @@ const Financiallimit = () => {
   }, [dailyPurchases]); // Watch for changes in dailyPurchases
 
   useEffect(() => {
-    saveToCSV(); // Save to CSV whenever dailyPurchases changes
   }, [dailyPurchases]);
 
   const calculateMonthlyTotal = () => {
@@ -22,16 +21,32 @@ const Financiallimit = () => {
     setMonthlyTotal(total.toFixed(2));
   };
 
-  const addDailyPurchase = (name, amount) => {
-    const newPurchase = { name, amount: parseFloat(amount).toFixed(2) };
-    setDailyPurchases([...dailyPurchases, newPurchase]);
+  const addDailyPurchase = async (name, amount) => {
+    try {
+      // Make a POST request to your backend
+      const response = await fetch('http://localhost:5000/api/add-purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, amount }),
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        // If the backend successfully adds the purchase, update the local state
+        const newPurchase = { name, amount: parseFloat(amount).toFixed(2) };
+        setDailyPurchases([...dailyPurchases, newPurchase]);
+      } else {
+        console.error('Failed to add purchase');
+      }
+    } catch (error) {
+      console.error('Error adding purchase', error);
+    }
   };
 
-  const saveToCSV = () => {
-    const csvData = dailyPurchases.map((purchase) => `${purchase.name},${purchase.amount}`).join("\n");
-    const blob = new Blob([`Purchases,Cost\n${csvData}`], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, "daily_purchases.csv");
-  };
+
 
   return (
     <>

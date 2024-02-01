@@ -37,7 +37,7 @@ const Footer = () => {
           </li>
         </ul>
         <p id="gg" className="text-center text-body-secondary">
-          <b>© 2023 MoneyBuddy, Inc</b>
+          <b>© 2024 MoneyBuddy, Inc</b>
         </p>
       </footer>
     </div>

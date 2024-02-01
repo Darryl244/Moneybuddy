@@ -3,17 +3,21 @@ import { Link } from "react-router-dom";
 import "./index.css";
 
 const Navbar = () => {
-  // Function to add spaces between each character in a string
-  const addSpacesBetweenLetters = (text) => {
-    return text.split("").join("\u00A0");
+  const username = localStorage.getItem("username");
+  const handleLogout = () => {
+    // Assuming you clear the username in localStorage to signify logout
+    localStorage.removeItem("username");
+    // You might want to redirect to the home page or perform additional logout logic
+    window.location.href = "/";
   };
+
 
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link id="navbar" className="navbar-brand text-dark fs-2" to="/">
-            <b>{addSpacesBetweenLetters("MONEYBUDDY")}</b>
+            <b>MONEYBUDDY</b>
           </Link>
           <button
             className="navbar-toggler"
@@ -68,18 +72,37 @@ const Navbar = () => {
               </li>
             </ul>
 
-            <form className="d-flex" role="search">
-              <button className="btn" type="submit">
-                <Link id="gg" className="nav-link text-dark" to="/login">
-                  <b>Login</b>
-                </Link>
-              </button>
-              <h3>/</h3>
-              <button className="btn" type="submit">
-                <Link id="gg" className="nav-link text-dark" to="/signup">
-                  <b>Signup</b>
-                </Link>
-              </button>
+            <form id="gg" className="d-flex" role="search">
+              {username ? (
+                <>
+                  <span className="navbar nav-link custom-link">
+                    <b>{username}</b>
+                  </span>
+                  <button
+                    className="btn"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    <span className="nav-link text-dark">
+                      <b>Logout</b>
+                    </span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="btn" type="submit">
+                    <Link id="gg" className="nav-link text-dark" to="/login">
+                      <b>Login</b>
+                    </Link>
+                  </button>
+                  <h3>/</h3>
+                  <button className="btn" type="submit">
+                    <Link id="gg" className="nav-link text-dark" to="/signup">
+                      <b>Signup</b>
+                    </Link>
+                  </button>
+                </>
+              )}
             </form>
           </div>
         </div>

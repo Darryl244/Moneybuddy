@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import Ani from "./animations/goal.json";
 import Secani from "./animations/secani.json";
-import { Link } from "react-router-dom";
-import "./index.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
@@ -11,19 +10,22 @@ const Home = () => {
   useEffect(() => {
     Aos.init();
   }, []);
+
+  const username = localStorage.getItem("username");
+
   return (
     <>
       <div className="gradient-background">
         <div>
           <div
-            class="container col-xxl-9 px-4 py-5"
+            className="container col-xxl-9 px-4 py-5"
             data-aos="fade-up"
             data-aos-anchor-placement="top-bottom"
             data-aos-duration="1000"
           >
-            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
               <div
-                class="col-5 col-l-8 col-xl-6"
+                className="col-5 col-l-8 col-xl-6"
                 style={{ backgroundColor: "#A7ECEE", borderRadius: "30px" }}
               >
                 <Lottie
@@ -32,26 +34,35 @@ const Home = () => {
                 />
               </div>
 
-              <div class="col-lg-6">
+              <div className="col-lg-6">
                 <h1
                   id="header"
-                  class="display-1  lh-1 mb-3"
+                  className="display-1  lh-1 mb-3"
                   style={{ color: "white" }}
                 >
                   <b>Banking Assistance Starts Here.</b>
                 </h1>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                  <button className="btn btn-info btn-lg" type="submit">
-                    <Link id="gg" className="nav-link" to="/login">
-                      <b>Login</b>
-                    </Link>
-                  </button>
-                  <button className="btn btn-success btn-lg" type="submit">
-                    <Link id="gg" className="nav-link" to="/signup">
-                      <b>Signup</b>
-                    </Link>
-                  </button>
+                <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+                  {username ? (
+                    <span className="navbar nav-link custom-link">
+                    <p style={{ color: "white", fontSize: "1.5em" }}>Welcome, {username}!</p>
+
+                    </span>
+                  ) : (
+                    <>
+                      <button className="btn btn-info btn-lg" type="submit">
+                        <Link id="gg" className="nav-link" to="/login">
+                          <b>Login</b>
+                        </Link>
+                      </button>
+                      <button className="btn btn-success btn-lg" type="submit">
+                        <Link id="gg" className="nav-link" to="/signup">
+                          <b>Signup</b>
+                        </Link>
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
