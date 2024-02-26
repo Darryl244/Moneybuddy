@@ -5,6 +5,7 @@ import Ani from "./animations/goal.json";
 import Secani from "./animations/secani.json";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Chatbot from "./Chatbot.js";
 
 const Home = () => {
   useEffect(() => {
@@ -46,8 +47,9 @@ const Home = () => {
                 <div className="d-grid gap-2 d-md-flex justify-content-md-start">
                   {username ? (
                     <span className="navbar nav-link custom-link">
-                    <p style={{ color: "white", fontSize: "1.5em" }}>Welcome, {username}!</p>
-
+                      <p style={{ color: "white", fontSize: "1.5em" }}>
+                        Welcome, {username}!
+                      </p>
                     </span>
                   ) : (
                     <>
@@ -283,6 +285,9 @@ const Home = () => {
 
             {/* /END THE FEATURETTES */}
           </div>
+        </div>
+        <div style={{ position: "fixed", bottom: 20, right: 20 }}>
+          <Chatbot />
         </div>
       </div>
     </>
